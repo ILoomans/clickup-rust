@@ -51,3 +51,14 @@ pub struct List {
 pub struct Lists {
     pub lists: Vec<List>,
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CreateList {
+    pub name: String,
+    pub content: Option<String>,
+    pub due_date: Option<u64>,
+    pub due_date_time: Option<bool>,
+    pub priority: Option<u32>,
+    pub assignee: Option<u64>,
+    pub status: Option<String>,
+}

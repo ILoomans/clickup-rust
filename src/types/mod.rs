@@ -1,11 +1,16 @@
+use serde::{Deserialize, Serialize};
+
 mod folders;
 mod lists;
 mod spaces;
 mod tasks;
 mod teams;
 
-pub use self::folders::{Folder, Folders};
-pub use self::lists::{List, Lists};
+#[derive(Serialize, Deserialize, Debug)]
+pub struct EmpptyResponse {}
+
+pub use self::folders::{CreateFolder, Folder, Folders};
+pub use self::lists::{CreateList, List, Lists};
 pub use self::spaces::{CreateFeatureSpace, CreateSpace, EnabledStruct, Space, Spaces};
-pub use self::tasks::{Task, Tasks};
+pub use self::tasks::{CreateTask, Task, Tasks};
 pub use self::teams::{CreateTeam, Team, Teams};

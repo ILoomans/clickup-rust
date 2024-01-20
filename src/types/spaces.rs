@@ -90,7 +90,7 @@ pub struct CreateSpace {
     pub name: String,
     pub multiple_assignees: bool,
     // optional features
-    pub features: Option<CreateFeatureSpace, None>,
+    pub features: Option<CreateFeatureSpace>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

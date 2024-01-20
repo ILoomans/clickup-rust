@@ -11,7 +11,6 @@ impl SpacesTraitTransporter {
 
     pub fn get_spaces(&self, team_id: &str) -> Result<types::Spaces, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/team/{}/space", team_id);
-        // println!("At get_spaces");
         self.transport.get(&url)
     }
 
@@ -36,11 +35,13 @@ impl SpacesTraitTransporter {
     pub fn delete_space(
         &self,
         space_id: &str,
-    ) -> Result<types::Spaces, Box<dyn std::error::Error>> {
-        todo!()
+    ) -> Result<types::EmpptyResponse, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/space/{}", space_id);
+        self.transport.delete(&url)
     }
 
-    pub fn get_space(&self, space_id: &str) -> Result<types::Spaces, Box<dyn std::error::Error>> {
-        todo!()
+    pub fn get_space(&self, space_id: &str) -> Result<types::Space, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/space/{}", space_id);
+        self.transport.get(&url)
     }
 }

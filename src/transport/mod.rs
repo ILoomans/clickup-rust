@@ -53,10 +53,12 @@ impl Transport {
         let request = self.client.request(method, url).headers(headers);
 
         let response = request.send().await.unwrap();
-        let body = response.text().await.unwrap();
+        let mut body = response.text().await.unwrap();
+        if body == "" {
+            body = "{}".to_string();
+        }
 
         // println!("BODY: {}", body);
-
         let processed_output = serde_json::from_str::<T>(&body).unwrap_or_else(|err| {
             println!("Error: {}", err);
             panic!("Failed to parse response from ClickUp API: {}", body)
@@ -83,8 +85,10 @@ impl Transport {
             .body(request_body);
 
         let response = request.send().await.unwrap();
-        let body = response.text().await.unwrap();
-
+        let mut body = response.text().await.unwrap();
+        if body == "" {
+            body = "{}".to_string();
+        }
         let processed_output = serde_json::from_str::<T>(&body).unwrap_or_else(|err| {
             println!("Error: {}", err);
             panic!("Failed to parse response from ClickUp API: {}", body)
@@ -110,6 +114,15 @@ impl Transport {
         let resp: T = self
             .execute_request_post(method, url, request_body)
             .unwrap(); // .unwrap(
+        Ok(resp)
+    }
+
+    pub fn delete<T: DeserializeOwned>(
+        self: &Self,
+        url: &str,
+    ) -> Result<T, Box<dyn std::error::Error>> {
+        let method = reqwest::Method::DELETE;
+        let resp: T = self.execute_request(method, url).unwrap(); // .unwrap(
         Ok(resp)
     }
 }

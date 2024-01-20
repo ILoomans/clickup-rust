@@ -6,7 +6,7 @@ use derive_more::{Display, From};
 
 use serde_json::Error as SerdeError;
 
-use crate::types::CreateSpace;
+use crate::types::{CreateList, CreateSpace};
 
 // https://clickup.com/api/developer-portal/errors/
 #[derive(Debug, Display, From, PartialEq)]
@@ -37,18 +37,87 @@ fn main() {
     let key = dotenv::var("CLICKUP_API_KEY").unwrap();
     let click_up_api = api::Api::new(&transport::Transport::new(key.to_string()));
 
-    // get teams
-    let teams = click_up_api.teams.get_teams().unwrap();
-    println!("Teams: {}", teams.teams.len());
-    let memberid = teams.teams[0].members[1].user.id;
-    let teamid = &teams.teams[0].id;
+    let space_id = "90120333090";
 
-    let space = CreateSpace {
-        name: "New Space Test".to_string(),
-        multiple_assignees: true,
+    // let output = click_up_api.spaces.delete_space(space_id).unwrap();
+    // println!("Output: {:?}", output);
+
+    // let space = click_up_api.spaces.get_space(space_id).unwrap();
+    // println!("Space: {:?}", space);
+
+    let folder_id = "90120840978";
+    let folder = click_up_api.folders.get_folder(folder_id).unwrap();
+    println!("Folder: {:?}", folder);
+    // let list = CreateList {
+    //     name: "new list 2".to_string(),
+    //     content: None,
+    //     due_date: None,
+    //     due_date_time: None,
+    //     priority: None,
+    //     assignee: None,
+    //     status: None,
+    // };
+
+    // let createdList: types::List = click_up_api.lists.create_list(folder_id, list).unwrap();
+    // println!("Created List: {:?}", createdList);
+
+    // let list_id = createdList.id;
+    // click_up_api.lists.delete_list(&list_id).unwrap();
+
+    let list_id = "901201442725";
+
+    let task = types::CreateTask {
+        name: "new task 7".to_string(),
+        description: None,
+        markdown_description: None,
+        assignees: None,
+        tags: None,
+        status: None,
+        priority: None,
+        due_date: None,
+        due_date_time: None,
+        time_estimate: None,
+        start_date: None,
+        start_date_time: None,
+        notify_all: None,
+        parent: None,
+        links_to: None,
+        check_required_custom_fields: None,
+        custom_fields: None,
     };
 
-    let spaces = click_up_api.spaces.get_spaces(teamid).unwrap();
+    let createdTask = click_up_api.tasks.create_task(list_id, task).unwrap();
+    println!("Created Task: {:?}", createdTask);
+
+    let created_list_id = createdTask.id;
+
+    click_up_api.tasks.delete_task(&created_list_id).unwrap();
+
+    // let folder = click_up_api
+    //     .folders
+    //     .create_folder(space_id, "another test folder")
+    //     .unwrap();
+    // println!("Folder: {:?}", folder);
+
+    // let folder_id = folder.id;
+    // // delete the folder
+
+    // click_up_api.folders.delete_folder(&folder_id).unwrap();
+
+    // get teams
+    // let teams = click_up_api.teams.get_teams().unwrap();
+    // println!("Teams: {}", teams.teams.len());
+    // let memberid = teams.teams[0].members[1].user.id;
+    // let teamid = &teams.teams[0].id;
+
+    // let space = CreateSpace {
+    //     name: "New Space Test".to_string(),
+    //     multiple_assignees: true,
+    //     features: None,
+    // };
+
+    // let result = click_up_api.spaces.create_space(teamid, space).unwrap();
+    // println!("Space: {:?}", result);
 
     // println!("Team ID: {}", teamid);
     // click_up_api

@@ -54,3 +54,8 @@ pub struct Folder {
 pub struct Folders {
     pub folders: Vec<Folder>,
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CreateFolder {
+    pub name: String,
+}

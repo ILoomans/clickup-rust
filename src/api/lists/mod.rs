@@ -1,4 +1,4 @@
-use crate::types;
+use crate::types::{self, CreateList};
 
 pub struct ListsTraitTransporter {
     transport: crate::transport::Transport,
@@ -17,9 +17,11 @@ impl ListsTraitTransporter {
     pub fn create_list(
         &self,
         folder_id: &str,
-        name: &str,
-    ) -> Result<types::Lists, Box<dyn std::error::Error>> {
-        todo!()
+        list: CreateList,
+    ) -> Result<types::List, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/folder/{}/list", folder_id);
+        let request_body = serde_json::to_string(&list)?;
+        self.transport.post(&url, request_body)
     }
 
     pub fn update_list(
@@ -30,8 +32,12 @@ impl ListsTraitTransporter {
         todo!()
     }
 
-    pub fn delete_list(&self, list_id: &str) -> Result<types::Lists, Box<dyn std::error::Error>> {
-        todo!()
+    pub fn delete_list(
+        &self,
+        list_id: &str,
+    ) -> Result<types::EmpptyResponse, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/list/{}", list_id);
+        self.transport.delete(&url)
     }
 
     pub fn get_list(&self, list_id: &str) -> Result<types::List, Box<dyn std::error::Error>> {
