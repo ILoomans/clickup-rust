@@ -14,11 +14,19 @@ impl ListsTraitTransporter {
         self.transport.get(&url)
     }
 
-    pub fn create_list(&self, folder_id: &str, name: &str) -> Result<types::Lists, Box<dyn std::error::Error>> {
+    pub fn create_list(
+        &self,
+        folder_id: &str,
+        name: &str,
+    ) -> Result<types::Lists, Box<dyn std::error::Error>> {
         todo!()
     }
 
-    pub fn update_list(&self, list_id: &str, name: &str) -> Result<types::Lists, Box<dyn std::error::Error>> {
+    pub fn update_list(
+        &self,
+        list_id: &str,
+        name: &str,
+    ) -> Result<types::Lists, Box<dyn std::error::Error>> {
         todo!()
     }
 
@@ -26,7 +34,8 @@ impl ListsTraitTransporter {
         todo!()
     }
 
-    pub fn get_list(&self, list_id: &str) -> Result<types::Lists, Box<dyn std::error::Error>> {
-        todo!()
+    pub fn get_list(&self, list_id: &str) -> Result<types::List, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/list/{}", list_id);
+        self.transport.get(&url)
     }
 }

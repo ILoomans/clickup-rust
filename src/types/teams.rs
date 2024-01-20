@@ -28,3 +28,9 @@ pub struct MemberInfo {
     pub initials: String,
     pub profilePicture: Option<String>,
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CreateTeam {
+    pub name: String,
+    pub members: Vec<String>,
+}

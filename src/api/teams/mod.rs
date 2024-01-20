@@ -1,4 +1,4 @@
-use crate::types::Teams;
+use crate::types::{CreateTeam, Team, Teams};
 
 pub struct TeamsTraitTransporter {
     transport: crate::transport::Transport,
@@ -17,8 +17,22 @@ impl TeamsTraitTransporter {
         self.transport.get(url)
     }
 
-    pub fn create_team(&self, name: &str) -> Result<Teams, Box<dyn std::error::Error>> {
-        todo!()
+    pub fn create_team(
+        &self,
+        team_id: &str,
+        name: &str,
+        members: Vec<String>,
+    ) -> Result<Team, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/team/{}/group", team_id);
+        let team = CreateTeam {
+            name: name.to_string(),
+            members,
+        };
+        // serialize team
+        // println!("At create_team");
+        let request_body = serde_json::to_string(&team)?;
+
+        self.transport.post(&url, request_body)
     }
 
     pub fn update_team(

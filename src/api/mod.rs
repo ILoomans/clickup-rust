@@ -1,19 +1,21 @@
 pub mod folders;
-pub mod spaces;
-pub mod teams;
 pub mod lists;
-
+pub mod spaces;
+pub mod tasks;
+pub mod teams;
 
 use folders::FoldersTraitTransporter;
-use spaces::SpacesTraitTransporter;
-use teams::TeamsTraitTransporter;
 use lists::ListsTraitTransporter;
+use spaces::SpacesTraitTransporter;
+use tasks::TasksTraitTransporter;
+use teams::TeamsTraitTransporter;
 
 pub struct Api {
     pub teams: TeamsTraitTransporter,
     pub spaces: SpacesTraitTransporter,
     pub folders: FoldersTraitTransporter,
     pub lists: ListsTraitTransporter,
+    pub tasks: TasksTraitTransporter,
 }
 
 impl Api {
@@ -23,6 +25,7 @@ impl Api {
             spaces: SpacesTraitTransporter::new(transport.clone()),
             folders: FoldersTraitTransporter::new(transport.clone()),
             lists: ListsTraitTransporter::new(transport.clone()),
+            tasks: TasksTraitTransporter::new(transport.clone()),
         }
     }
 
@@ -33,51 +36,4 @@ impl Api {
     pub fn spaces(&self) -> &spaces::SpacesTraitTransporter {
         &self.spaces
     }
-
-
 }
-
-// pub struct Transporter {
-//     transport: crate::transport::Transport,
-// }
-
-// impl Transporter {
-//     pub fn new(transport: &crate::transport::Transport) -> Transporter {
-//         Transporter {
-//             transport: transport.clone(),
-//         }
-//     }
-// }
-// pub mod spaces;
-// pub mod teams;
-// pub mod folders;
-// pub struct Api {
-//     pub teams: Transporter,
-
-//     pub spaces: Transporter,
-
-//     pub folders: Transporter,
-// }
-
-// impl Api {
-//     pub fn new(transport: &crate::transport::Transport) -> Api {
-//         Api {
-//             teams: teams::TeamsTrait::new(transport.clone()),
-//             spaces: spaces::SpacesTrait::new(transport.clone()),
-//             folders: folders::FoldersTrait::new(transport.clone()),
-
-//         }
-//     }
-
-//     pub fn teams(&self) -> &Transporter {
-//         &self.teams
-//     }
-
-//     pub fn spaces(&self) -> &Transporter {
-//         &self.spaces
-//     }
-// }
-
-// pub struct Transporter {
-//     transport: crate::transport::Transport,
-// }

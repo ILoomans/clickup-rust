@@ -30,7 +30,7 @@ pub struct List {
     pub status: Option<Status>,
     pub priority: Option<String>,
     pub assignee: Option<String>,
-    pub task_count: u32,
+    pub task_count: Option<u32>,
     pub due_date: Option<String>,
     pub start_date: Option<String>,
     pub folder: Folder,

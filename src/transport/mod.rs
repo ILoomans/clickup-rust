@@ -55,10 +55,40 @@ impl Transport {
         let response = request.send().await.unwrap();
         let body = response.text().await.unwrap();
 
-        println!("BODY: {}", body);
+        // println!("BODY: {}", body);
 
-        let processed_output = serde_json::from_str::<T>(&body)
-            .unwrap_or_else(|_| panic!("Failed to parse response from ClickUp API: {}", body));
+        let processed_output = serde_json::from_str::<T>(&body).unwrap_or_else(|err| {
+            println!("Error: {}", err);
+            panic!("Failed to parse response from ClickUp API: {}", body)
+        });
+        Ok(processed_output)
+    }
+
+    #[tokio::main]
+    async fn execute_request_post<T: DeserializeOwned>(
+        self: &Self,
+        method: reqwest::Method,
+        url: &str,
+        request_body: String,
+    ) -> Result<T, Error> {
+        println!("At execute_request");
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.insert("Content-Type", "application/json".parse().unwrap());
+        headers.insert("Authorization", self.auth_key.parse().unwrap());
+
+        let request = self
+            .client
+            .request(method, url)
+            .headers(headers)
+            .body(request_body);
+
+        let response = request.send().await.unwrap();
+        let body = response.text().await.unwrap();
+
+        let processed_output = serde_json::from_str::<T>(&body).unwrap_or_else(|err| {
+            println!("Error: {}", err);
+            panic!("Failed to parse response from ClickUp API: {}", body)
+        });
         Ok(processed_output)
     }
 
@@ -74,9 +104,12 @@ impl Transport {
     pub fn post<T: DeserializeOwned>(
         self: &Self,
         url: &str,
+        request_body: String,
     ) -> Result<T, Box<dyn std::error::Error>> {
         let method = reqwest::Method::POST;
-        let resp: T = self.execute_request(method, url).unwrap(); // .unwrap(
+        let resp: T = self
+            .execute_request_post(method, url, request_body)
+            .unwrap(); // .unwrap(
         Ok(resp)
     }
 }

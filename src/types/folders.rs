@@ -28,7 +28,7 @@ pub struct List {
     pub task_count: u32,
     pub due_date: Option<String>,
     pub start_date: Option<String>,
-    pub space: Space,
+    pub space: Option<Space>,
     pub archived: bool,
     pub override_statuses: Option<bool>,
     pub statuses: Vec<Status>,

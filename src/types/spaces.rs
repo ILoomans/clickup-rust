@@ -84,3 +84,36 @@ pub struct Space {
 pub struct Spaces {
     pub spaces: Vec<Space>,
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CreateSpace {
+    pub name: String,
+    pub multiple_assignees: bool,
+    // optional features
+    pub features: Option<CreateFeatureSpace, None>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct DueDates {
+    pub enabled: bool,
+    pub start_date: bool,
+    pub remap_due_dates: bool,
+    pub remap_closed_due_date: bool,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct EnabledStruct {
+    pub enabled: bool,
+}
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CreateFeatureSpace {
+    pub due_dates: Option<DueDates>,
+    pub time_tracking: Option<EnabledStruct>,
+    pub tags: Option<EnabledStruct>,
+    pub time_estimates: Option<EnabledStruct>,
+    pub checklists: Option<EnabledStruct>,
+    pub custom_fields: Option<EnabledStruct>,
+    pub remap_dependencies: Option<EnabledStruct>,
+    pub dependency_warning: Option<EnabledStruct>,
+    pub portfolios: Option<EnabledStruct>,
+}

@@ -40,10 +40,8 @@ impl FoldersTraitTransporter {
         todo!()
     }
 
-    pub fn get_folder(
-        &self,
-        folder_id: &str,
-    ) -> Result<types::Folders, Box<dyn std::error::Error>> {
-        todo!()
+    pub fn get_folder(&self, folder_id: &str) -> Result<types::Folder, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/folder/{}", folder_id);
+        self.transport.get(&url)
     }
 }
