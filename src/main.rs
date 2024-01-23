@@ -2,6 +2,7 @@ pub mod api;
 pub mod transport;
 pub mod types;
 
+use api::custom_fields;
 use derive_more::{Display, From};
 
 use serde_json::Error as SerdeError;
@@ -39,12 +40,27 @@ fn main() {
     let key = dotenv::var("CLICKUP_API_KEY").unwrap();
     let click_up_api = api::Api::new(&transport::Transport::new(key.to_string()));
 
-    let authorized_user = click_up_api.authorization.get_authorized_user().unwrap();
-    println!("Authorized User: {:?}", authorized_user);
+
+    let list_id = 176667743;
+    let custom_fields = click_up_api.custom_fields.get_accessible_custom_fields(list_id).unwrap();
+    println!("Custom Fields: {:?}", custom_fields);
+
+
+    
+
+
+    // let authorized_user = click_up_api.authorization.get_authorized_user().unwrap();
+    // println!("Authorized User: {:?}", authorized_user);
+
+    // let team_id = 2662797;
+
+    // let custom_task_types = click_up_api.custom_task_types.get_custom_task_types(team_id).unwrap();
+
+    // println!("Custom Task Types: {:?}", custom_task_types);
 
 
 
-    let list_id = 901201442725;
+    // let list_id: u64 = 901201442725;
 
     //    let comment = CreateComment {
     //     comment_text: "This is a test comment".to_string(),
@@ -55,10 +71,10 @@ fn main() {
     // click_up_api.comments.create_list_comment(list_id, comment).unwrap();
 
 
-    let comments = click_up_api.comments.get_list_comments(list_id).unwrap();
-    println!("Comments: {:?}", comments);
+    // let comments = click_up_api.comments.get_list_comments(list_id).unwrap();
+    // println!("Comments: {:?}", comments);
 
-    let comment_id = comments.comments[0].id.parse::<u64>().unwrap();
+    // let comment_id = comments.comments[0].id.parse::<u64>().unwrap();
 
     // let updaed_comment = UpdateComment {
     //     comment_text: "This is an updated comment".to_string(),
@@ -68,11 +84,11 @@ fn main() {
 
     // click_up_api.comments.update_comment(comment_id, updaed_comment).unwrap();
 
-    click_up_api.comments.delete_comment(comment_id).unwrap();
-    
+    // click_up_api.comments.delete_comment(comment_id).unwrap();
 
-    let new_comments = click_up_api.comments.get_list_comments(list_id).unwrap();
-    println!("New Comments: {:?}", new_comments);
+
+    // let new_comments = click_up_api.comments.get_list_comments(list_id).unwrap();
+    // println!("New Comments: {:?}", new_comments);
 
 
 

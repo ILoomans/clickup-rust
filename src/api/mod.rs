@@ -5,6 +5,8 @@ pub mod spaces;
 pub mod tasks;
 pub mod teams;
 pub mod comments;
+pub mod custom_task_types;
+pub mod custom_fields;
 
 use authorization::AuthorizationTraitTransporter;
 use folders::FoldersTraitTransporter;
@@ -13,6 +15,8 @@ use spaces::SpacesTraitTransporter;
 use tasks::TasksTraitTransporter;
 use teams::TeamsTraitTransporter;
 use comments::CommentsTraitTransporter;
+use custom_task_types::CustomTaskTypesTraitTransporter;
+use custom_fields::CustomFieldsTraitTransporter;
 
 pub struct Api {
     pub teams: TeamsTraitTransporter,
@@ -22,6 +26,8 @@ pub struct Api {
     pub tasks: TasksTraitTransporter,
     pub authorization: AuthorizationTraitTransporter,
     pub comments: CommentsTraitTransporter,
+    pub custom_task_types: CustomTaskTypesTraitTransporter,
+    pub custom_fields: CustomFieldsTraitTransporter,
 }
 
 impl Api {
@@ -34,6 +40,8 @@ impl Api {
             tasks: TasksTraitTransporter::new(transport.clone()),
             authorization: AuthorizationTraitTransporter::new(transport.clone()),
             comments: CommentsTraitTransporter::new(transport.clone()),
+            custom_task_types: CustomTaskTypesTraitTransporter::new(transport.clone()),
+            custom_fields: CustomFieldsTraitTransporter::new(transport.clone()),
         }
     }
 
