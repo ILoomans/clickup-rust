@@ -37,7 +37,7 @@ impl ListsTraitTransporter {
     pub fn delete_list(
         &self,
         list_id: &str,
-    ) -> Result<types::EmpptyResponse, Box<dyn std::error::Error>> {
+    ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/list/{}", list_id);
         self.transport.delete(&url)
     }

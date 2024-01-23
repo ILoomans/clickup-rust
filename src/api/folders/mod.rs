@@ -48,7 +48,7 @@ impl FoldersTraitTransporter {
     pub fn delete_folder(
         &self,
         folder_id: &str,
-    ) -> Result<types::EmpptyResponse, Box<dyn std::error::Error>> {
+    ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/folder/{}", folder_id);
         self.transport.delete(&url)
     }

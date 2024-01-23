@@ -37,7 +37,7 @@ impl TasksTraitTransporter {
     pub fn delete_task(
         &self,
         task_id: &str,
-    ) -> Result<types::EmpptyResponse, Box<dyn std::error::Error>> {
+    ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/task/{}", task_id);
         self.transport.delete(&url)
     }

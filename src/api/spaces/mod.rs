@@ -37,7 +37,7 @@ impl SpacesTraitTransporter {
     pub fn delete_space(
         &self,
         space_id: &str,
-    ) -> Result<types::EmpptyResponse, Box<dyn std::error::Error>> {
+    ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/space/{}", space_id);
         self.transport.delete(&url)
     }

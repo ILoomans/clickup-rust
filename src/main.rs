@@ -6,7 +6,7 @@ use derive_more::{Display, From};
 
 use serde_json::Error as SerdeError;
 
-use crate::types::{CreateList, CreateSpace};
+use crate::types::{CreateChatViewComment, CreateComment, CreateList, CreateSpace, UpdateComment};
 
 // https://clickup.com/api/developer-portal/errors/
 #[derive(Debug, Display, From, PartialEq)]
@@ -41,6 +41,76 @@ fn main() {
 
     let authorized_user = click_up_api.authorization.get_authorized_user().unwrap();
     println!("Authorized User: {:?}", authorized_user);
+
+
+
+    let list_id = 901201442725;
+
+    //    let comment = CreateComment {
+    //     comment_text: "This is a test comment".to_string(),
+    //     assignee: 6647942,
+    //     notify_all: false
+    // }; 
+
+    // click_up_api.comments.create_list_comment(list_id, comment).unwrap();
+
+
+    let comments = click_up_api.comments.get_list_comments(list_id).unwrap();
+    println!("Comments: {:?}", comments);
+
+    let comment_id = comments.comments[0].id.parse::<u64>().unwrap();
+
+    // let updaed_comment = UpdateComment {
+    //     comment_text: "This is an updated comment".to_string(),
+    //     resolved: false,
+    //     notify_all: false
+    // };
+
+    // click_up_api.comments.update_comment(comment_id, updaed_comment).unwrap();
+
+    click_up_api.comments.delete_comment(comment_id).unwrap();
+    
+
+    let new_comments = click_up_api.comments.get_list_comments(list_id).unwrap();
+    println!("New Comments: {:?}", new_comments);
+
+
+
+
+
+    
+    // let view_id = "2h8cd-1872";
+    
+    // let comment = CreateChatViewComment {
+    //     comment_text: "This is a test comment".to_string(),
+    //     notify_all: false
+    // };
+
+    // click_up_api.comments.create_chat_view_comment(view_id, comment).unwrap();
+
+
+
+
+
+
+
+    // let member_id = "6647942";
+    // let task_id = "8693kdpp2";
+    // let team_id = 2662797;
+    // let custom_task_ids = false;
+
+
+    // let comment = CreateComment {
+    //     comment_text: "This is a test comment".to_string(),
+    //     assignee: 6647942,
+    //     notify_all: false
+    // };
+    // // create a comment 
+    // click_up_api.comments.create_task_comment(task_id, false, team_id, comment).unwrap();
+
+
+
+
 
 
     // let comment = click_up_api.comments.get_task_comments("8693m01tx").unwrap();
@@ -221,7 +291,7 @@ fn main() {
 
     // get teams
     // let teams = click_up_api.teams.get_teams().unwrap();
-    // // println!("Teams: {}", teams.teams.len());
+    // println!("Teams: {:?}", teams);
     // // let memberid = teams.teams[0].members[1].user.id;
     // let teamid = &teams.teams[0].id;
 
