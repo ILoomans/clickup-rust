@@ -27,9 +27,11 @@ impl SpacesTraitTransporter {
     pub fn update_space(
         &self,
         space_id: &str,
-        name: &str,
-    ) -> Result<types::Spaces, Box<dyn std::error::Error>> {
-        todo!()
+        space: CreateSpace,
+    ) -> Result<types::Space, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/space/{}", space_id);
+        let request_body = serde_json::to_string(&space)?;
+        self.transport.put(&url, request_body)
     }
 
     pub fn delete_space(

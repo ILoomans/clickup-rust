@@ -27,9 +27,11 @@ impl ListsTraitTransporter {
     pub fn update_list(
         &self,
         list_id: &str,
-        name: &str,
-    ) -> Result<types::Lists, Box<dyn std::error::Error>> {
-        todo!()
+        list: CreateList,
+    ) -> Result<types::List, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/list/{}", list_id);
+        let request_body = serde_json::to_string(&list)?;
+        self.transport.put(&url, request_body)
     }
 
     pub fn delete_list(

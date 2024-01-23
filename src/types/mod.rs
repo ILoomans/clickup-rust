@@ -6,9 +6,15 @@ mod spaces;
 mod tasks;
 mod teams;
 
+mod authorization;
+
+mod comments;
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct EmpptyResponse {}
 
+pub use self::authorization::{AccessToken, AuthorizedUser};
+pub use self::comments::{Comment, Comments};
 pub use self::folders::{CreateFolder, Folder, Folders};
 pub use self::lists::{CreateList, List, Lists};
 pub use self::spaces::{CreateFeatureSpace, CreateSpace, EnabledStruct, Space, Spaces};

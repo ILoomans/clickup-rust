@@ -125,4 +125,16 @@ impl Transport {
         let resp: T = self.execute_request(method, url).unwrap(); // .unwrap(
         Ok(resp)
     }
+
+    pub fn put<T: DeserializeOwned>(
+        self: &Self,
+        url: &str,
+        request_body: String,
+    ) -> Result<T, Box<dyn std::error::Error>> {
+        let method = reqwest::Method::PUT;
+        let resp: T = self
+            .execute_request_post(method, url, request_body)
+            .unwrap(); // .unwrap(
+        Ok(resp)
+    }
 }

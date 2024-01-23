@@ -2,10 +2,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Status {
-    pub status: String,
+    pub status: Option<String>,
     pub color: String,
     pub r#type: String,
-    pub orderindex: u32,
+    pub orderindex: i32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

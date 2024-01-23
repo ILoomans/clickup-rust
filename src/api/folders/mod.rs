@@ -35,8 +35,14 @@ impl FoldersTraitTransporter {
         &self,
         folder_id: &str,
         name: &str,
-    ) -> Result<types::Folders, Box<dyn std::error::Error>> {
-        todo!()
+    ) -> Result<types::Folder, Box<dyn std::error::Error>> {
+        let folder = CreateFolder {
+            name: name.to_string(),
+        };
+
+        let url = format!("https://api.clickup.com/api/v2/folder/{}", folder_id);
+        let request_body = serde_json::to_string(&folder)?;
+        self.transport.put(&url, request_body)
     }
 
     pub fn delete_folder(

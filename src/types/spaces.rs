@@ -69,7 +69,7 @@ pub struct Features {
 pub struct Space {
     pub id: String,
     pub name: String,
-    pub color: String,
+    pub color: Option<String>,
     pub private: bool,
     pub avatar: Option<String>,
     pub admin_can_manage: Option<bool>,

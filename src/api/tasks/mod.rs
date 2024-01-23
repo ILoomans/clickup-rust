@@ -27,9 +27,11 @@ impl TasksTraitTransporter {
     pub fn update_task(
         &self,
         task_id: &str,
-        name: &str,
-    ) -> Result<types::Tasks, Box<dyn std::error::Error>> {
-        todo!()
+        name: CreateTask,
+    ) -> Result<types::Task, Box<dyn std::error::Error>> {
+        let url = format!("https://api.clickup.com/api/v2/task/{}", task_id);
+        let request_body = serde_json::to_string(&name)?;
+        self.transport.put(&url, request_body)
     }
 
     pub fn delete_task(

@@ -32,12 +32,41 @@ impl From<SerdeError> for Error {
     }
 }
 
+// TODO: check that the status is available to the list
+// TODO: Update for team
 fn main() {
     // println!("Hello, world!");
     let key = dotenv::var("CLICKUP_API_KEY").unwrap();
     let click_up_api = api::Api::new(&transport::Transport::new(key.to_string()));
 
-    let space_id = "90120333090";
+    let authorized_user = click_up_api.authorization.get_authorized_user().unwrap();
+    println!("Authorized User: {:?}", authorized_user);
+
+
+    // let comment = click_up_api.comments.get_task_comments("8693m01tx").unwrap();
+    // println!("Comment: {:?}", comment);
+
+
+    // let chat_view_comment = click_up_api.comments.get_chat_view_comments("2h8cd-1852").unwrap();
+    // println!("Chat View Comment: {:?}", chat_view_comment);
+
+
+
+
+    // let space_id = "90120392694";
+
+    // let space = CreateSpace {
+    //     name: "New Space Test Updated".to_string(),
+    //     multiple_assignees: true,
+    //     features: None,
+    // };
+
+    // let updatedSpace = click_up_api.spaces.update_space(space_id, space).unwrap();
+    // println!("Updated Space: {:?}", updatedSpace);
+
+    // let updatedSpace =
+
+    // let space_id = "90120333090";
 
     // let output = click_up_api.spaces.delete_space(space_id).unwrap();
     // println!("Output: {:?}", output);
@@ -45,9 +74,9 @@ fn main() {
     // let space = click_up_api.spaces.get_space(space_id).unwrap();
     // println!("Space: {:?}", space);
 
-    let folder_id = "90120840978";
-    let folder = click_up_api.folders.get_folder(folder_id).unwrap();
-    println!("Folder: {:?}", folder);
+    // let folder_id = "90120840978";
+    // let folder = click_up_api.folders.get_folder(folder_id).unwrap();
+    // println!("Folder: {:?}", folder);
     // let list = CreateList {
     //     name: "new list 2".to_string(),
     //     content: None,
@@ -58,46 +87,132 @@ fn main() {
     //     status: None,
     // };
 
+    ///////// UPDATE FOLDER WORK
+    // first create a folder
+
+    // let folder = click_up_api.folders.create_folder(space_id, "new folder").unwrap();
+    // println!("Folder: {:?}", folder);
+
+    // let folder_id = folder.id;
+
+    // let updatedFolder = click_up_api.folders.update_folder(&folder_id, "new folder updated").unwrap();
+
+    // println!("Updated Folder: {:?}", updatedFolder);
+    //////// UPDATED LIST WORK
+    // let folder_id = "90120842824";
+    // let list = CreateList {
+    //     name: "new list".to_string(),
+    //     content: None,
+    //     due_date: None,
+    //     due_date_time: None,
+    //     priority: None,
+    //     assignee: None,
+    //     status: None,
+    // };
+
     // let createdList: types::List = click_up_api.lists.create_list(folder_id, list).unwrap();
+
+    // let updated_list = CreateList {
+    //     name: "new list 2 updated".to_string(),
+    //     content: None,
+    //     due_date: None,
+    //     due_date_time: None,
+    //     priority: None,
+    //     assignee: None,
+    //     status: None,
+    // };
+
+    // let updatedList: types::List = click_up_api
+    //     .lists
+    //     .update_list(&createdList.id, updated_list)
+    //     .unwrap();
+    // println!("Updated List: {:?}", updatedList);
+
+    ///// Updated task work
+    //
+    // let list_id = "901201445324";
+
+    // let task = types::CreateTask {
+    //     name: "new task 9".to_string(),
+    //     description: None,
+    //     markdown_description: None,
+    //     assignees: None,
+    //     tags: None,
+    //     status: None,
+    //     priority: None,
+    //     due_date: None,
+    //     due_date_time: None,
+    //     time_estimate: None,
+    //     start_date: None,
+    //     start_date_time: None,
+    //     notify_all: None,
+    //     parent: None,
+    //     links_to: None,
+    //     check_required_custom_fields: None,
+    //     custom_fields: None,
+    // };
+
+    // let createdTask = click_up_api.tasks.create_task(list_id, task).unwrap();
+
+    // let task_id = createdTask.id;
+
+    // let updated_task = types::CreateTask {
+    //     name: "new task 8 updated".to_string(),
+    //     description: None,
+    //     markdown_description: None,
+    //     assignees: None,
+    //     tags: None,
+    //     status: Some("Complete".to_string()),
+    //     priority: None,
+    //     due_date: None,
+    //     due_date_time: None,
+    //     time_estimate: None,
+    //     start_date: None,
+    //     start_date_time: None,
+    //     notify_all: None,
+    //     parent: None,
+    //     links_to: None,
+    //     check_required_custom_fields: None,
+    //     custom_fields: None,
+    // };
+
+    // let updatedTask = click_up_api.tasks.update_task(&task_id, updated_task).unwrap();
+
+    // println!("Updated Task: {:?}", updatedTask);
+
     // println!("Created List: {:?}", createdList);
 
     // let list_id = createdList.id;
     // click_up_api.lists.delete_list(&list_id).unwrap();
 
-    let list_id = "901201442725";
+    // let list_id = "901201442725";
 
-    let task = types::CreateTask {
-        name: "new task 7".to_string(),
-        description: None,
-        markdown_description: None,
-        assignees: None,
-        tags: None,
-        status: None,
-        priority: None,
-        due_date: None,
-        due_date_time: None,
-        time_estimate: None,
-        start_date: None,
-        start_date_time: None,
-        notify_all: None,
-        parent: None,
-        links_to: None,
-        check_required_custom_fields: None,
-        custom_fields: None,
-    };
+    // let task = types::CreateTask {
+    //     name: "new task 7".to_string(),
+    //     description: None,
+    //     markdown_description: None,
+    //     assignees: None,
+    //     tags: None,
+    //     status: None,
+    //     priority: None,
+    //     due_date: None,
+    //     due_date_time: None,
+    //     time_estimate: None,
+    //     start_date: None,
+    //     start_date_time: None,
+    //     notify_all: None,
+    //     parent: None,
+    //     links_to: None,
+    //     check_required_custom_fields: None,
+    //     custom_fields: None,
+    // };
 
-    let createdTask = click_up_api.tasks.create_task(list_id, task).unwrap();
-    println!("Created Task: {:?}", createdTask);
+    // let createdTask = click_up_api.tasks.create_task(list_id, task).unwrap();
+    // println!("Created Task: {:?}", createdTask);
 
-    let created_list_id = createdTask.id;
+    // let created_list_id = createdTask.id;
 
-    click_up_api.tasks.delete_task(&created_list_id).unwrap();
-
-    // let folder = click_up_api
-    //     .folders
-    //     .create_folder(space_id, "another test folder")
-    //     .unwrap();
-    // println!("Folder: {:?}", folder);
+    // click_up_api.tasks.delete_task(&created_list_id).unwrap();
 
     // let folder_id = folder.id;
     // // delete the folder
@@ -106,8 +221,8 @@ fn main() {
 
     // get teams
     // let teams = click_up_api.teams.get_teams().unwrap();
-    // println!("Teams: {}", teams.teams.len());
-    // let memberid = teams.teams[0].members[1].user.id;
+    // // println!("Teams: {}", teams.teams.len());
+    // // let memberid = teams.teams[0].members[1].user.id;
     // let teamid = &teams.teams[0].id;
 
     // let space = CreateSpace {
