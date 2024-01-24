@@ -1,14 +1,17 @@
 use crate::types;
 
+/// Custom Fields Trait for the ClickUp API.
 pub struct CustomFieldsTraitTransporter {
     transport: crate::transport::Transport,
 }
 
 impl CustomFieldsTraitTransporter {
+    /// Create a new instance of the Custom Fields Trait Transporter.
     pub fn new(transport: crate::transport::Transport) -> Self {
         Self { transport }
     }
 
+    /// Get all accessible custom fields.
     pub fn get_accessible_custom_fields(
         &self,
         list_id: u64,

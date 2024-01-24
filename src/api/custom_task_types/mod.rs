@@ -1,14 +1,17 @@
 use crate::types;
 
+/// Custom Task Types Trait for the ClickUp API.
 pub struct CustomTaskTypesTraitTransporter {
     transport: crate::transport::Transport,
 }
 
 impl CustomTaskTypesTraitTransporter {
+    /// Create a new instance of the Custom Task Types Trait Transporter.
     pub fn new(transport: crate::transport::Transport) -> Self {
         Self { transport }
     }
 
+    /// Get all custom task types.
     pub fn get_custom_task_types(
         &self,
         team_id: u64,

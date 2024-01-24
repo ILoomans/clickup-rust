@@ -1,13 +1,24 @@
+/// The Authorization API.
 pub mod authorization;
+/// The Comments API.
 pub mod comments;
+/// The Custom Fields API.
 pub mod custom_fields;
+/// The Custom Task Types API.
 pub mod custom_task_types;
+/// The Folders API.
 pub mod folders;
+/// The Goals API.
 pub mod goals;
+/// The Lists API.
 pub mod lists;
+/// The Members API.
 pub mod members;
+/// The Spaces API.
 pub mod spaces;
+/// The Tasks API.   
 pub mod tasks;
+/// The Teams API.
 pub mod teams;
 
 use authorization::AuthorizationTraitTransporter;
@@ -36,7 +47,9 @@ pub struct Api {
     pub members: MembersTraitTransporter,
 }
 
+/// The ClickUp API and its methods.
 impl Api {
+    /// Create a new instance of the ClickUp API.
     pub fn new(api_key: String) -> Api {
         let transport = crate::transport::Transport::new(api_key);
         Api {
@@ -52,13 +65,5 @@ impl Api {
             goals: GoalsTraitTransporter::new(transport.clone()),
             members: MembersTraitTransporter::new(transport.clone()),
         }
-    }
-
-    pub fn teams(&self) -> &teams::TeamsTraitTransporter {
-        &self.teams
-    }
-
-    pub fn spaces(&self) -> &spaces::SpacesTraitTransporter {
-        &self.spaces
     }
 }

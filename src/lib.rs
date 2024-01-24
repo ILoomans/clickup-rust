@@ -1,3 +1,5 @@
+//! # ClickUp API
+//! This is a Rust wrapper for the ClickUp API.
 pub mod api;
 pub mod transport;
 pub mod types;

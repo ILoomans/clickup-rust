@@ -1,14 +1,17 @@
 use crate::types::{self, CreateChatViewComment, CreateComment, UpdateComment};
 
+/// Comments Trait for the ClickUp API.
 pub struct CommentsTraitTransporter {
     transport: crate::transport::Transport,
 }
 
 impl CommentsTraitTransporter {
+    /// Create a new instance of the Comments Trait Transporter.
     pub fn new(transport: crate::transport::Transport) -> Self {
         Self { transport }
     }
 
+    /// Get all comments for a given task.
     pub fn get_task_comments(
         &self,
         task_id: &str,
@@ -17,6 +20,7 @@ impl CommentsTraitTransporter {
         self.transport.get(&url)
     }
 
+    /// Get all comments for a given chat view.
     pub fn get_chat_view_comments(
         &self,
         view_id: &str,
@@ -25,6 +29,7 @@ impl CommentsTraitTransporter {
         self.transport.get(&url)
     }
 
+    /// Get all comments for a given list.
     pub fn get_list_comments(
         &self,
         list_id: u64,
@@ -33,6 +38,7 @@ impl CommentsTraitTransporter {
         self.transport.get(&url)
     }
 
+    /// Create a comment for a given task.
     pub fn create_task_comment(
         &self,
         task_id: &str,
@@ -47,6 +53,7 @@ impl CommentsTraitTransporter {
         self.transport.post(&url, request_body)
     }
 
+    /// Create a comment for a given chat view.
     pub fn create_chat_view_comment(
         &self,
         view_id: &str,
@@ -57,6 +64,7 @@ impl CommentsTraitTransporter {
         self.transport.post(&url, request_body)
     }
 
+    /// Create a comment for a given list.
     pub fn create_list_comment(
         &self,
         list_id: u64,
@@ -67,6 +75,7 @@ impl CommentsTraitTransporter {
         self.transport.post(&url, request_body)
     }
 
+    /// Update a specific comment.
     pub fn update_comment(
         &self,
         comment_id: u64,
@@ -77,6 +86,7 @@ impl CommentsTraitTransporter {
         self.transport.put(&url, request_body)
     }
 
+    /// Delete a specific comment.
     pub fn delete_comment(
         &self,
         comment_id: u64,

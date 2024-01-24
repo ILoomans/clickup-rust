@@ -1,5 +1,6 @@
 use crate::types;
 
+/// Goals Trait for the ClickUp API.
 pub struct GoalsTraitTransporter {
     transport: crate::transport::Transport,
 }
@@ -11,11 +12,13 @@ impl GoalsTraitTransporter {
 
     // TODO: Add folders return paramater
     // TODO: Implement goals key results
+    /// Get all goals.
     pub fn get_goals(&self, team_id: u64) -> Result<types::Goals, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/team/{team_id}/goal");
         self.transport.get(&url)
     }
 
+    /// Create a goal.
     pub fn create_goal(
         &self,
         team_id: u64,
@@ -26,6 +29,7 @@ impl GoalsTraitTransporter {
         self.transport.post(&url, request_body)
     }
 
+    /// Get a specific goal.
     pub fn get_goal(
         &self,
         goal_id: &str,
@@ -34,6 +38,7 @@ impl GoalsTraitTransporter {
         self.transport.get(&url)
     }
 
+    /// Delete a specific goal.
     pub fn delete_goal(
         &self,
         goal_id: &str,
@@ -42,6 +47,7 @@ impl GoalsTraitTransporter {
         self.transport.delete(&url)
     }
 
+    /// Update a specific goal.
     pub fn update_goal(
         &self,
         goal_id: &str,

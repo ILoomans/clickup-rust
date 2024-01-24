@@ -1,14 +1,17 @@
 use crate::types;
 
+/// Members Trait for the ClickUp API.
 pub struct MembersTraitTransporter {
     transport: crate::transport::Transport,
 }
 
 impl MembersTraitTransporter {
+    /// Create a new instance of the Members Trait Transporter.
     pub fn new(transport: crate::transport::Transport) -> Self {
         Self { transport }
     }
 
+    /// Get all task members.
     pub fn get_task_members(
         &self,
         task_id: &str,
@@ -17,6 +20,7 @@ impl MembersTraitTransporter {
         self.transport.get(&url)
     }
 
+    /// Get all list members.
     pub fn get_list_members(
         &self,
         list_id: u64,

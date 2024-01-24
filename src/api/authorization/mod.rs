@@ -1,15 +1,17 @@
 use crate::types;
 
+/// Authorization Trait for the ClickUp API.
 pub struct AuthorizationTraitTransporter {
     transport: crate::transport::Transport,
 }
 
 impl AuthorizationTraitTransporter {
+    /// Create a new instance of the Authorization Trait Transporter.
     pub fn new(transport: crate::transport::Transport) -> Self {
         Self { transport }
     }
 
-    // TODO: Test this function
+    /// Get an access token.
     pub fn get_access_token(
         &self,
         client_id: &str,
@@ -22,6 +24,7 @@ impl AuthorizationTraitTransporter {
         self.transport.post(&url, "{}".to_string())
     }
 
+    /// Get an authorized user.
     pub fn get_authorized_user(&self) -> Result<types::AuthorizedUser, Box<dyn std::error::Error>> {
         let url = "https://api.clickup.com/api/v2/user".to_string();
         self.transport.get(&url)

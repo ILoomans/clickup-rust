@@ -1,21 +1,25 @@
 use crate::types::{CreateTeam, Team, Teams};
 
+/// Teams Trait for the ClickUp API.
 pub struct TeamsTraitTransporter {
     transport: crate::transport::Transport,
 }
 
 impl TeamsTraitTransporter {
+    /// Create a new instance of the Teams Trait Transporter.
     pub fn new(transport: &crate::transport::Transport) -> TeamsTraitTransporter {
         TeamsTraitTransporter {
             transport: transport.clone(),
         }
     }
 
+    /// Get all teams.
     pub fn get_teams(&self) -> Result<Teams, Box<dyn std::error::Error>> {
         let url = "https://api.clickup.com/api/v2/team";
         self.transport.get(url)
     }
 
+    /// Get a specific team.
     pub fn create_team(
         &self,
         team_id: &str,
@@ -31,14 +35,7 @@ impl TeamsTraitTransporter {
         self.transport.post(&url, request_body)
     }
 
-    // pub fn update_team(
-    //     &self,
-    //     team_id: &str,
-    //     name: &str,
-    // ) -> Result<Teams, Box<dyn std::error::Error>> {
-    //     todo!()
-    // }
-
+    /// Delete a specific team.
     pub fn delete_team(&self, team_id: &str) -> Result<Teams, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/team/{team_id}");
         self.transport.delete(&url)

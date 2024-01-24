@@ -29,7 +29,7 @@ pub struct Transport {
     pub client: reqwest::Client,
     pub api_key: String,
 }
-
+/// Transport is a wrapper around reqwest::Client
 impl Transport {
     pub fn new(api_key: String) -> Self {
         let client = reqwest::Client::builder().build().unwrap();

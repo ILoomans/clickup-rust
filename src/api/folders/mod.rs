@@ -1,14 +1,17 @@
 use crate::types::{self, CreateFolder};
 
+/// Folders Trait for the ClickUp API.
 pub struct FoldersTraitTransporter {
     transport: crate::transport::Transport,
 }
 
 impl FoldersTraitTransporter {
+    /// Create a new instance of the Folders Trait Transporter.
     pub fn new(transport: crate::transport::Transport) -> Self {
         Self { transport }
     }
 
+    /// Get all folders.
     pub fn get_folders(
         &self,
         space_id: &str,
@@ -17,6 +20,7 @@ impl FoldersTraitTransporter {
         self.transport.get(&url)
     }
 
+    /// Create a specific folder.
     pub fn create_folder(
         &self,
         space_id: &str,
@@ -31,6 +35,7 @@ impl FoldersTraitTransporter {
         self.transport.post(&url, request_body)
     }
 
+    /// Update a specific folder.
     pub fn update_folder(
         &self,
         folder_id: &str,
@@ -45,6 +50,7 @@ impl FoldersTraitTransporter {
         self.transport.put(&url, request_body)
     }
 
+    /// Delete a specific folder.
     pub fn delete_folder(
         &self,
         folder_id: &str,
@@ -53,6 +59,7 @@ impl FoldersTraitTransporter {
         self.transport.delete(&url)
     }
 
+    /// Get a specific folder.
     pub fn get_folder(&self, folder_id: &str) -> Result<types::Folder, Box<dyn std::error::Error>> {
         let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}");
         self.transport.get(&url)
