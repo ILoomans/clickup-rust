@@ -37,7 +37,6 @@ pub struct Comments {
     pub comments: Vec<Comment>,
 }
 
-
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateComment {
     pub comment_text: String,
@@ -45,21 +44,18 @@ pub struct CreateComment {
     pub notify_all: bool,
 }
 
-
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateCommentResponse {
     pub id: u128,
     pub hist_id: String,
-    pub date: u128
+    pub date: u128,
 }
-
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateChatViewComment {
     pub comment_text: String,
     pub notify_all: bool,
 }
-
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UpdateComment {

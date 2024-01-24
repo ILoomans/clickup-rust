@@ -6,6 +6,7 @@ use api::custom_fields;
 use derive_more::{Display, From};
 
 use serde_json::Error as SerdeError;
+use types::{CreateGoal, UpdateGoal};
 
 use crate::types::{CreateChatViewComment, CreateComment, CreateList, CreateSpace, UpdateComment};
 
@@ -40,10 +41,52 @@ fn main() {
     let key = dotenv::var("CLICKUP_API_KEY").unwrap();
     let click_up_api = api::Api::new(&transport::Transport::new(key.to_string()));
 
+    let team_id = 2662797;
+    let member_id = 6647942;
 
-    let list_id = 176667743;
-    let custom_fields = click_up_api.custom_fields.get_accessible_custom_fields(list_id).unwrap();
-    println!("Custom Fields: {:?}", custom_fields);
+
+
+    let goal = CreateGoal {
+        name: "New Goal".to_string(),
+        due_date: 1737722728,        
+        description: "This is a new goal".to_string(),
+        multiple_owners: false,
+        owners: [member_id].to_vec(),
+        color: "#32a852".to_string(),
+
+    };
+
+    let goal = click_up_api.goals.create_goal(team_id, goal).unwrap();
+    let id = goal.goal.id;
+    let updated_goal = UpdateGoal {
+        name: "New Goal Updated".to_string(),
+        due_date: 1737722728,        
+        description: "This is a new goal".to_string(),
+        add_owners: [].to_vec(),
+        rem_owners: [].to_vec(),
+        color: "#32a852".to_string(),
+    };
+
+    click_up_api.goals.update_goal(&id, updated_goal).unwrap();
+
+    let updatedGoal = click_up_api.goals.get_goal(&id).unwrap();
+    println!("Updated Goal: {:?}", updatedGoal);
+
+    
+    // let goals = click_up_api.goals.get_goals(team_id).unwrap();
+    // println!("Goals: {:?}", goals);
+
+    // let goal_id = &goals.goals[0].id;
+
+    // let goal = click_up_api.goals.get_goal(goal_id).unwrap();
+    // println!("Goal: {:?}", goal);
+
+    // click_up_api.goals.delete_goal(goal_id).unwrap();
+
+
+    // let list_id = 176667743;
+    // let custom_fields = click_up_api.custom_fields.get_accessible_custom_fields(list_id).unwrap();
+    // println!("Custom Fields: {:?}", custom_fields);
 
 
     
@@ -52,7 +95,6 @@ fn main() {
     // let authorized_user = click_up_api.authorization.get_authorized_user().unwrap();
     // println!("Authorized User: {:?}", authorized_user);
 
-    // let team_id = 2662797;
 
     // let custom_task_types = click_up_api.custom_task_types.get_custom_task_types(team_id).unwrap();
 
