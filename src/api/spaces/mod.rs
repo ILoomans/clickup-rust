@@ -10,7 +10,7 @@ impl SpacesTraitTransporter {
     }
 
     pub fn get_spaces(&self, team_id: &str) -> Result<types::Spaces, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/team/{}/space", team_id);
+        let url = format!("https://api.clickup.com/api/v2/team/{team_id}/space");
         self.transport.get(&url)
     }
 
@@ -19,7 +19,7 @@ impl SpacesTraitTransporter {
         team_id: &str,
         space: CreateSpace,
     ) -> Result<types::Space, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/team/{}/space", team_id);
+        let url = format!("https://api.clickup.com/api/v2/team/{team_id}/space");
         let request_body = serde_json::to_string(&space)?;
         self.transport.post(&url, request_body)
     }
@@ -29,7 +29,7 @@ impl SpacesTraitTransporter {
         space_id: &str,
         space: CreateSpace,
     ) -> Result<types::Space, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/space/{}", space_id);
+        let url = format!("https://api.clickup.com/api/v2/space/{space_id}");
         let request_body = serde_json::to_string(&space)?;
         self.transport.put(&url, request_body)
     }
@@ -38,12 +38,12 @@ impl SpacesTraitTransporter {
         &self,
         space_id: &str,
     ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/space/{}", space_id);
+        let url = format!("https://api.clickup.com/api/v2/space/{space_id}");
         self.transport.delete(&url)
     }
 
     pub fn get_space(&self, space_id: &str) -> Result<types::Space, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/space/{}", space_id);
+        let url = format!("https://api.clickup.com/api/v2/space/{space_id}");
         self.transport.get(&url)
     }
 }

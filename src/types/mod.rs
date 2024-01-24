@@ -1,13 +1,13 @@
 use serde::{Deserialize, Serialize};
 
+mod authorization;
 mod folders;
 mod goals;
 mod lists;
+mod members;
 mod spaces;
 mod tasks;
 mod teams;
-
-mod authorization;
 
 mod comments;
 
@@ -26,6 +26,7 @@ pub use self::custom_task_types::CustomItems;
 pub use self::folders::{CreateFolder, Folder, Folders};
 pub use self::goals::{CreateGoal, Goal, GoalContainer, Goals, UpdateGoal};
 pub use self::lists::{CreateList, List, Lists};
+pub use self::members::Members;
 pub use self::spaces::{CreateFeatureSpace, CreateSpace, EnabledStruct, Space, Spaces};
 pub use self::tasks::{CreateTask, Task, Tasks};
 pub use self::teams::{CreateTeam, Team, Teams};

@@ -13,10 +13,7 @@ impl CustomTaskTypesTraitTransporter {
         &self,
         team_id: u64,
     ) -> Result<types::CustomItems, Box<dyn std::error::Error>> {
-        let url = format!(
-            "https://api.clickup.com/api/v2/team/{}/custom_item",
-            team_id
-        );
+        let url = format!("https://api.clickup.com/api/v2/team/{team_id}/custom_item");
         self.transport.get(&url)
     }
 

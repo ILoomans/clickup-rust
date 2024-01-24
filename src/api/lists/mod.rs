@@ -10,7 +10,7 @@ impl ListsTraitTransporter {
     }
 
     pub fn get_lists(&self, folder_id: &str) -> Result<types::Lists, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/folder/{}/list", folder_id);
+        let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}/list");
         self.transport.get(&url)
     }
 
@@ -19,7 +19,7 @@ impl ListsTraitTransporter {
         folder_id: &str,
         list: CreateList,
     ) -> Result<types::List, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/folder/{}/list", folder_id);
+        let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}/list");
         let request_body = serde_json::to_string(&list)?;
         self.transport.post(&url, request_body)
     }
@@ -29,7 +29,7 @@ impl ListsTraitTransporter {
         list_id: &str,
         list: CreateList,
     ) -> Result<types::List, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/list/{}", list_id);
+        let url = format!("https://api.clickup.com/api/v2/list/{list_id}");
         let request_body = serde_json::to_string(&list)?;
         self.transport.put(&url, request_body)
     }
@@ -38,12 +38,12 @@ impl ListsTraitTransporter {
         &self,
         list_id: &str,
     ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/list/{}", list_id);
+        let url = format!("https://api.clickup.com/api/v2/list/{list_id}");
         self.transport.delete(&url)
     }
 
     pub fn get_list(&self, list_id: &str) -> Result<types::List, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/list/{}", list_id);
+        let url = format!("https://api.clickup.com/api/v2/list/{list_id}");
         self.transport.get(&url)
     }
 }

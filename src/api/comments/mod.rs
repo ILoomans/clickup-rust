@@ -13,7 +13,7 @@ impl CommentsTraitTransporter {
         &self,
         task_id: &str,
     ) -> Result<types::Comments, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/task/{}/comment", task_id);
+        let url = format!("https://api.clickup.com/api/v2/task/{task_id}/comment");
         self.transport.get(&url)
     }
 
@@ -21,7 +21,7 @@ impl CommentsTraitTransporter {
         &self,
         view_id: &str,
     ) -> Result<types::Comments, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/view/{}/comment", view_id);
+        let url = format!("https://api.clickup.com/api/v2/view/{view_id}/comment");
         self.transport.get(&url)
     }
 
@@ -29,7 +29,7 @@ impl CommentsTraitTransporter {
         &self,
         list_id: u64,
     ) -> Result<types::Comments, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/list/{}/comment", list_id);
+        let url = format!("https://api.clickup.com/api/v2/list/{list_id}/comment");
         self.transport.get(&url)
     }
 
@@ -41,8 +41,7 @@ impl CommentsTraitTransporter {
         comment: CreateComment,
     ) -> Result<types::CreateCommentResponse, Box<dyn std::error::Error>> {
         let url = format!(
-            "https://api.clickup.com/api/v2/task/{}/comment?custom_task_ids={}&team_id={}",
-            task_id, custom_tasks_ids, team_id
+            "https://api.clickup.com/api/v2/task/{task_id}/comment?custom_task_ids={custom_tasks_ids}&team_id={team_id}",
         );
         let request_body = serde_json::to_string(&comment)?;
         self.transport.post(&url, request_body)
@@ -53,7 +52,7 @@ impl CommentsTraitTransporter {
         view_id: &str,
         comment: CreateChatViewComment,
     ) -> Result<types::CreateCommentResponse, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/view/{}/comment", view_id);
+        let url = format!("https://api.clickup.com/api/v2/view/{view_id}/comment");
         let request_body = serde_json::to_string(&comment)?;
         self.transport.post(&url, request_body)
     }
@@ -63,7 +62,7 @@ impl CommentsTraitTransporter {
         list_id: u64,
         comment: CreateComment,
     ) -> Result<types::CreateCommentResponse, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/list/{}/comment", list_id);
+        let url = format!("https://api.clickup.com/api/v2/list/{list_id}/comment");
         let request_body = serde_json::to_string(&comment)?;
         self.transport.post(&url, request_body)
     }
@@ -73,7 +72,7 @@ impl CommentsTraitTransporter {
         comment_id: u64,
         comment: UpdateComment,
     ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/comment/{}", comment_id);
+        let url = format!("https://api.clickup.com/api/v2/comment/{comment_id}");
         let request_body = serde_json::to_string(&comment)?;
         self.transport.put(&url, request_body)
     }
@@ -82,7 +81,7 @@ impl CommentsTraitTransporter {
         &self,
         comment_id: u64,
     ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/comment/{}", comment_id);
+        let url = format!("https://api.clickup.com/api/v2/comment/{comment_id}");
         self.transport.delete(&url)
     }
 }

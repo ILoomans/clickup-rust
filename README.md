@@ -2,7 +2,6 @@
 
 A Rust client library for the ClickUp V2 API.
 
-
 ## Completed
 
 - [x] Authorization
@@ -15,15 +14,15 @@ A Rust client library for the ClickUp V2 API.
 - [x] Spaces
 - [x] Tasks
 - [x] Teams (workspace)
-
+- [x] Add members endpoint
 
 ## TODO
+
 - [ ] Add documentation
 - [ ] Add tests
 - [ ] Add examples
 - [ ] Add Attachments endpoint
 - [ ] Add Guests endpoint
-- [ ] Add members endpoint
 - [ ] Add roles endpoint
 - [ ] Add shared hierarchy endpoint
 - [ ] Add tags endpoint
@@ -35,7 +34,3 @@ A Rust client library for the ClickUp V2 API.
 - [ ] Add user endpoint
 - [ ] Add webhooks endpoint
 - [ ] Add workspaces endpoint
-
-
-
-

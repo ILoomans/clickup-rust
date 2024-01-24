@@ -13,7 +13,7 @@ impl FoldersTraitTransporter {
         &self,
         space_id: &str,
     ) -> Result<types::Folders, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/space/{}/folder", space_id);
+        let url = format!("https://api.clickup.com/api/v2/space/{space_id}/folder");
         self.transport.get(&url)
     }
 
@@ -26,7 +26,7 @@ impl FoldersTraitTransporter {
             name: name.to_string(),
         };
 
-        let url = format!("https://api.clickup.com/api/v2/space/{}/folder", space_id);
+        let url = format!("https://api.clickup.com/api/v2/space/{space_id}/folder");
         let request_body = serde_json::to_string(&folder)?;
         self.transport.post(&url, request_body)
     }
@@ -40,7 +40,7 @@ impl FoldersTraitTransporter {
             name: name.to_string(),
         };
 
-        let url = format!("https://api.clickup.com/api/v2/folder/{}", folder_id);
+        let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}");
         let request_body = serde_json::to_string(&folder)?;
         self.transport.put(&url, request_body)
     }
@@ -49,12 +49,12 @@ impl FoldersTraitTransporter {
         &self,
         folder_id: &str,
     ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/folder/{}", folder_id);
+        let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}");
         self.transport.delete(&url)
     }
 
     pub fn get_folder(&self, folder_id: &str) -> Result<types::Folder, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/folder/{}", folder_id);
+        let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}");
         self.transport.get(&url)
     }
 }

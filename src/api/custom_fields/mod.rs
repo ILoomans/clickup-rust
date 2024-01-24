@@ -13,7 +13,7 @@ impl CustomFieldsTraitTransporter {
         &self,
         list_id: u64,
     ) -> Result<types::Fields, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/list/{}/field", list_id);
+        let url = format!("https://api.clickup.com/api/v2/list/{list_id}/field");
         self.transport.get(&url)
     }
 }

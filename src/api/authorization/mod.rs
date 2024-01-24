@@ -17,14 +17,13 @@ impl AuthorizationTraitTransporter {
         code: &str,
     ) -> Result<types::AccessToken, Box<dyn std::error::Error>> {
         let url = format!(
-            "https://api.clickup.com/api/v2/oauth/token?client_id={}&client_secret={}&code={}",
-            client_id, client_secret, code
+            "https://api.clickup.com/api/v2/oauth/token?client_id={client_id}&client_secret={client_secret}&code={code}"
         );
         self.transport.post(&url, "{}".to_string())
     }
 
     pub fn get_authorized_user(&self) -> Result<types::AuthorizedUser, Box<dyn std::error::Error>> {
-        let url = format!("https://api.clickup.com/api/v2/user");
+        let url = "https://api.clickup.com/api/v2/user".to_string();
         self.transport.get(&url)
     }
 }

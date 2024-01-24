@@ -17,7 +17,8 @@ pub struct Owner {
     pub initials: String,
     pub email: String,
     pub color: String,
-    pub profilePicture: Option<String>,
+    #[serde(rename = "profilePicture")]
+    pub profile_picture: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -54,7 +55,6 @@ pub struct Goals {
     pub goals: Vec<Goal>,
 }
 
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UpdateGoal {
     pub name: String,
@@ -64,5 +64,3 @@ pub struct UpdateGoal {
     pub add_owners: Vec<u64>,
     pub color: String,
 }
-
-

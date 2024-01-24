@@ -5,6 +5,7 @@ pub mod custom_task_types;
 pub mod folders;
 pub mod goals;
 pub mod lists;
+pub mod members;
 pub mod spaces;
 pub mod tasks;
 pub mod teams;
@@ -16,6 +17,7 @@ use custom_task_types::CustomTaskTypesTraitTransporter;
 use folders::FoldersTraitTransporter;
 use goals::GoalsTraitTransporter;
 use lists::ListsTraitTransporter;
+use members::MembersTraitTransporter;
 use spaces::SpacesTraitTransporter;
 use tasks::TasksTraitTransporter;
 use teams::TeamsTraitTransporter;
@@ -31,12 +33,14 @@ pub struct Api {
     pub custom_task_types: CustomTaskTypesTraitTransporter,
     pub custom_fields: CustomFieldsTraitTransporter,
     pub goals: GoalsTraitTransporter,
+    pub members: MembersTraitTransporter,
 }
 
 impl Api {
-    pub fn new(transport: &crate::transport::Transport) -> Api {
+    pub fn new(api_key: String) -> Api {
+        let transport = crate::transport::Transport::new(api_key);
         Api {
-            teams: TeamsTraitTransporter::new(transport),
+            teams: TeamsTraitTransporter::new(&transport),
             spaces: SpacesTraitTransporter::new(transport.clone()),
             folders: FoldersTraitTransporter::new(transport.clone()),
             lists: ListsTraitTransporter::new(transport.clone()),
@@ -46,6 +50,7 @@ impl Api {
             custom_task_types: CustomTaskTypesTraitTransporter::new(transport.clone()),
             custom_fields: CustomFieldsTraitTransporter::new(transport.clone()),
             goals: GoalsTraitTransporter::new(transport.clone()),
+            members: MembersTraitTransporter::new(transport.clone()),
         }
     }
 

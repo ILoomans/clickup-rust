@@ -7,7 +7,8 @@ pub struct User {
     pub email: String,
     pub color: Option<String>,
     pub initials: String,
-    pub profilePicture: Option<String>,
+    #[serde(rename = "profilePicture")]
+    pub profile_picture: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

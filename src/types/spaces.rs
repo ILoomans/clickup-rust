@@ -23,7 +23,8 @@ pub struct User {
     pub id: u64,
     pub username: String,
     pub color: String,
-    pub profilePicture: Option<String>,
+    #[serde(rename = "profilePicture")]
+    pub profile_picture: Option<String>,
     pub initials: String,
 }
 

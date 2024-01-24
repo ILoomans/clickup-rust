@@ -14,7 +14,8 @@ pub struct Creator {
     pub username: String,
     pub color: String,
     pub email: String,
-    pub profilePicture: Option<String>,
+    #[serde(rename = "profilePicture")]
+    pub profile_picture: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -24,7 +25,8 @@ pub struct Assignee {
     pub color: String,
     pub initials: String,
     pub email: String,
-    pub profilePicture: Option<String>,
+    #[serde(rename = "profilePicture")]
+    pub profile_picture: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

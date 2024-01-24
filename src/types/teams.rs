@@ -26,7 +26,8 @@ pub struct MemberInfo {
     pub color: String,
     pub email: String,
     pub initials: String,
-    pub profilePicture: Option<String>,
+    #[serde(rename = "profilePicture")]
+    pub profile_picture: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
