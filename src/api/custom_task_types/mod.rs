@@ -1,4 +1,4 @@
-use crate::types;
+use crate::{transport, types};
 
 /// Custom Task Types Trait for the ClickUp API.
 pub struct CustomTaskTypesTraitTransporter {
@@ -15,7 +15,7 @@ impl CustomTaskTypesTraitTransporter {
     pub fn get_custom_task_types(
         &self,
         team_id: u64,
-    ) -> Result<types::CustomItems, Box<dyn std::error::Error>> {
+    ) -> Result<types::CustomItems, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/team/{team_id}/custom_item");
         self.transport.get(&url)
     }

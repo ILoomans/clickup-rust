@@ -1,4 +1,4 @@
-use crate::types;
+use crate::{transport, types};
 
 /// Custom Fields Trait for the ClickUp API.
 pub struct CustomFieldsTraitTransporter {
@@ -15,7 +15,7 @@ impl CustomFieldsTraitTransporter {
     pub fn get_accessible_custom_fields(
         &self,
         list_id: u64,
-    ) -> Result<types::Fields, Box<dyn std::error::Error>> {
+    ) -> Result<types::Fields, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/list/{list_id}/field");
         self.transport.get(&url)
     }

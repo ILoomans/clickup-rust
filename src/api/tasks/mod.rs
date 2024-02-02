@@ -1,5 +1,5 @@
+use crate::transport;
 use crate::types::{self, CreateTask};
-
 /// Tasks Trait for the ClickUp API.
 pub struct TasksTraitTransporter {
     transport: crate::transport::Transport,
@@ -12,7 +12,7 @@ impl TasksTraitTransporter {
     }
 
     /// Get all tasks.
-    pub fn get_tasks(&self, list_id: &str) -> Result<types::Tasks, Box<dyn std::error::Error>> {
+    pub fn get_tasks(&self, list_id: &str) -> Result<types::Tasks, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/list/{list_id}/task");
         self.transport.get(&url)
     }
@@ -22,7 +22,7 @@ impl TasksTraitTransporter {
         &self,
         list_id: &str,
         task: CreateTask,
-    ) -> Result<types::Task, Box<dyn std::error::Error>> {
+    ) -> Result<types::Task, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/list/{list_id}/task");
         let request_body = serde_json::to_string(&task)?;
         self.transport.post(&url, request_body)
@@ -33,23 +33,20 @@ impl TasksTraitTransporter {
         &self,
         task_id: &str,
         name: CreateTask,
-    ) -> Result<types::Task, Box<dyn std::error::Error>> {
+    ) -> Result<types::Task, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/task/{task_id}");
         let request_body = serde_json::to_string(&name)?;
         self.transport.put(&url, request_body)
     }
 
     /// Delete a specific task.
-    pub fn delete_task(
-        &self,
-        task_id: &str,
-    ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
+    pub fn delete_task(&self, task_id: &str) -> Result<types::EmptyResponse, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/task/{task_id}");
         self.transport.delete(&url)
     }
 
     /// Get a specific task.
-    pub fn get_task(&self, task_id: &str) -> Result<types::Task, Box<dyn std::error::Error>> {
+    pub fn get_task(&self, task_id: &str) -> Result<types::Task, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/task/{task_id}");
         self.transport.get(&url)
     }

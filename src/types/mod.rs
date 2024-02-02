@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 mod authorization;
+mod errors;
 mod folders;
 mod goals;
 mod lists;
@@ -23,6 +24,7 @@ pub use self::comments::{
 };
 pub use self::custom_fields::Fields;
 pub use self::custom_task_types::CustomItems;
+pub use self::errors::ClickUpError;
 pub use self::folders::{CreateFolder, Folder, Folders};
 pub use self::goals::{CreateGoal, Goal, GoalContainer, Goals, UpdateGoal};
 pub use self::lists::{CreateList, List, Lists};

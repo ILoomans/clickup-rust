@@ -1,5 +1,5 @@
+use crate::transport;
 use crate::types::{self, CreateFolder};
-
 /// Folders Trait for the ClickUp API.
 pub struct FoldersTraitTransporter {
     transport: crate::transport::Transport,
@@ -12,10 +12,7 @@ impl FoldersTraitTransporter {
     }
 
     /// Get all folders.
-    pub fn get_folders(
-        &self,
-        space_id: &str,
-    ) -> Result<types::Folders, Box<dyn std::error::Error>> {
+    pub fn get_folders(&self, space_id: &str) -> Result<types::Folders, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/space/{space_id}/folder");
         self.transport.get(&url)
     }
@@ -25,7 +22,7 @@ impl FoldersTraitTransporter {
         &self,
         space_id: &str,
         name: &str,
-    ) -> Result<types::Folder, Box<dyn std::error::Error>> {
+    ) -> Result<types::Folder, transport::Error> {
         let folder = CreateFolder {
             name: name.to_string(),
         };
@@ -40,7 +37,7 @@ impl FoldersTraitTransporter {
         &self,
         folder_id: &str,
         name: &str,
-    ) -> Result<types::Folder, Box<dyn std::error::Error>> {
+    ) -> Result<types::Folder, transport::Error> {
         let folder = CreateFolder {
             name: name.to_string(),
         };
@@ -51,16 +48,13 @@ impl FoldersTraitTransporter {
     }
 
     /// Delete a specific folder.
-    pub fn delete_folder(
-        &self,
-        folder_id: &str,
-    ) -> Result<types::EmptyResponse, Box<dyn std::error::Error>> {
+    pub fn delete_folder(&self, folder_id: &str) -> Result<types::EmptyResponse, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}");
         self.transport.delete(&url)
     }
 
     /// Get a specific folder.
-    pub fn get_folder(&self, folder_id: &str) -> Result<types::Folder, Box<dyn std::error::Error>> {
+    pub fn get_folder(&self, folder_id: &str) -> Result<types::Folder, transport::Error> {
         let url = format!("https://api.clickup.com/api/v2/folder/{folder_id}");
         self.transport.get(&url)
     }
